@@ -58,11 +58,11 @@ li.removed-item{animation: removed-item-animation .8s cubic-bezier(.65,-0.02,.72
 .op-done:hover{background:#00B16A;}
 .op-done:active{background:#00B16A; border:2px solid green;}
 
-.op-edit{background:rgba(247, 202, 24, 0.8); border:2px solid rgba(255, 255, 0, 0.3); height: 40px; width: 40px; float: right; margin-top: 5px}
+.op-edit{background:rgba(247, 202, 24, 0.8); border:2px solid rgba(255, 255, 0, 0.3); height: 40px; width: 40px; position: absolute; right: 48px; margin-top: 5px}
 .op-edit:hover{background:#F7CA18;}
 .op-edit:active{background:#F7CA18; border:2px solid yellow;}
 
-.op-del{background:rgba(242, 38, 19, 0.7); border:2px solid rgba(255,0,0,0.3); height: 40px; width: 40px; float: right; margin-top: 5px}
+.op-del{background:rgba(242, 38, 19, 0.7); border:2px solid rgba(255,0,0,0.3); height: 40px; width: 40px; position: absolute; right: 2px; margin-top: 5px}
 .op-del:hover{background:#F22613;}
 .op-del:active{background:#F22613; border:2px solid red;}
 
@@ -77,6 +77,8 @@ li.removed-item{animation: removed-item-animation .8s cubic-bezier(.65,-0.02,.72
     and (max-width: 500px) {
         section{width:350px;margin: 0 auto;}
         .message{right:5px;bottom:80px;font-size: small;}
+        ul{-webkit-padding-start: 25px;}
+        .habit-desc{font-size: small;}
 }
 
 /* desktop, tablet */
