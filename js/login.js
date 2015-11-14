@@ -1,6 +1,6 @@
-var firebaseRef = new Firebase("https://boiling-torch-2236.firebaseio.com");
+var oFirebaseRef = new Firebase("https://boiling-torch-2236.firebaseio.com");
 
-firebaseRef.getAuth();
+oFirebaseRef.getAuth();
 
 
 //This function is called as soon as the authenticate information is received
@@ -26,7 +26,7 @@ document.querySelector('#loginButton').onclick=function(){
 	var userEmail = document.querySelector('#usermail').value;
 	var password = document.querySelector('#password').value; 
 
-	firebaseRef.authWithPassword({
+	oFirebaseRef.authWithPassword({
 		email		: userEmail,
 		password	: password
 		}, authHandler
