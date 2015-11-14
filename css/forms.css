@@ -181,6 +181,9 @@ div label input {
 }
 #ck-button input:hover + span {
     cursor: pointer;
+    background-color:#9c9696; 
+    border-radius:5px;
+    color:#fff;
 }
 
 #daily-button {  
@@ -222,5 +225,18 @@ span#times{
 }
 #daily-button input:hover + span {
     cursor: pointer;
+    background-color:#9c9696; 
+    border-radius:25px;
+    color:#fff;
 }
 
+<<<<<<< HEAD
+=======
+/*
+.buttonactive {
+    background-color: #9c9696;
+    border-radius: 25px;
+    color: #fff;
+}
+*/
+>>>>>>> origin/master
