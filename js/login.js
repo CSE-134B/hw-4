@@ -1,4 +1,4 @@
-var oFirebaseRef = new Firebase("https://boiling-torch-2236.firebaseio.com");
+var oFirebaseRef = new Firebase("https://boiling-torch-2236.firebaseio.com/web/");
 
 oFirebaseRef.getAuth();
 
