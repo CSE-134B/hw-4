@@ -1,4 +1,4 @@
-
+var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/');
 
 function showMsg(element){
             var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
@@ -7,10 +7,7 @@ function showMsg(element){
         }
 
         function deleteHabit(element){
-            var child = element.parentNode.parentNode;
-            var parent = child.parentNode;
-            parent.removeChild(child);
-        }
+          
 
 
 
@@ -32,4 +29,21 @@ document.querySelector(".op-done").onclick = function(){
 	var aChildren = oParentLi.getElementsByTagName('progress');
 	var oProgress = aChildren[0];
     animator(oProgress);
+}
+
+document.querySelector(".op-delete").onclick = function(){
+  	var oHabit = this.parentNode.parentNode;
+  	var sHabitId = oHabit.querySelector('input[name=habit-id]').value;
+    var oHabitsList = oHabit.parentNode;
+  	var oHabitRef = oFirebaseRef.child("habits" + sHabitId);
+
+  	oHabitRef.remove(onComplete);
+
+  	var onComplete = function(error) {
+  		if (error) {
+  			console.log('Synchronization failed');
+  		} else {
+  			console.log('Synchronization succeeded');
+  			oHabitsList.removeChild(oHabit);
+  		}
 }
