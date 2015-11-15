@@ -22,21 +22,17 @@
                         </button>
                     </li>
                     <li><img class="habit-icon" src="../img/sleep.jpg" alt="habit icon"></li>
-                    <li><p class="habit-desc">enter optional description here enter optional description here enter optional description here enter optional description here</p>
-</li>
+                    <li><p class="habit-desc">enter optional description here enter optional description here enter optional description here enter optional description here</p></li>
                 </ul>
                 <div class="message">
                     <span class="message-total">
                         <strong>2</strong> days in a row! Best Record: <strong>5</strong><br>
-                        <svg height="25" width="150">
-                            <line x1="0" y1="0" x2="60" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25" />
-                            <line x1="60" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />
-                        </svg>
+                       <progress class="habit-progress" max="100" value="0"></progress>
                     </span><br>
                     <span class="message-today">Completed <strong id="habitCounter">1</strong><strong>/1</strong> for today!</span>
                 </div>
                 <div class="habit-op">
-                    <button type="button" class="op op-done" onclick="showMsg(this); increase();" title="done">
+                    <button type="button" class="op op-done" title="done">
                         <img src="../img/done.svg" alt="Done">
                     </button>
                 </div>
@@ -102,10 +98,8 @@
     </section>
 
     <button type="button" id="addHabit" onclick="location.href='add.html'" title="add habit">+</button>
-<<<<<<< HEAD
     
     <script src="../js/list.js"></script> 
-=======
 
     <script type="text/javascript">
         function showMsg(element){
@@ -133,6 +127,5 @@
             document.getElementById('habitCounter').innerHTML= +i;
         }
     </script>
->>>>>>> origin/master
 </body>
 </html>

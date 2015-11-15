@@ -41,6 +41,7 @@ li.removed-item{animation: removed-item-animation .8s cubic-bezier(.65,-0.02,.72
 .habit-name{margin:0; padding:0; height:100%; display:inline-block; vertical-align: middle; line-height:60px;color:#888;font-size: 24px;}
 .habit-icon{margin:0; border-radius:5px;width:100px; height:100px;}
 .habit-desc{max-width:76%; max-height:inherit; margin-top:2%; word-wrap:break-word; color:#888;}
+.habit-progress{width:70%;}
 
 .message{position:absolute; display:inline-block; visibility: hidden; text-align:left; color:#888;}
 .message-total{visibility: visible;}
