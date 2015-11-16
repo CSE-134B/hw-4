@@ -4,6 +4,8 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Welcome to Virtue/Vice!</title>
+		<link rel="stylesheet" href="../css/login.css">
+    <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
 		<link rel="stylesheet" href="../css/login.css"> 
 	</head>
 	<body>  
@@ -32,8 +34,8 @@
        	</table>
        	<p id="signInMessage">Sign in successful! <span style="color: #4caf50">&#10004;</span></p>
        	<div class="buttons">
-       		<input class="loginButton" type="button" value="Login" onclick="location.href='welcome.html'">
-          <input class="signUpButton" type="button" value="Signup" onclick="onClickSignUp()">
+       		<input id="loginButton" class="loginButton" type="button" value="Login">
+          <input id="signUpButton" class="signUpButton" type="button" value="Signup">
         </div>
       </form>
     </div>
