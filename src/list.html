@@ -6,11 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/list.css">
     <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+        <script> 
+        windows.onload = function(){
+
+        var list = document.getElementById("awards");
+        var li = document.createElement("li");
+        var value = document.createTextNode("hello world");
+            li.appendChild(value);
+            list.appendChild(li);
+
+        }
+        
+        
+    </script>
 </head>
 <body>
     <section>
         <h1>Habit List</h1>
         <ul id="habit-list">
+            <template id = "habits">
             <li>
                 <input type="hidden" name="habit-id">
                 <ul class="habit-info">
@@ -39,7 +53,7 @@
                     </button>
                 </div>
             </li>
-               
+            </template>
             <li>
                 <input type="hidden" name="habit-id">
                 <ul class="habit-info">
@@ -157,6 +171,20 @@
             
         });
     </script>
+    <script>
+        window.onload = function()
+        {
+
+        var habitList = document.getElementById("habit-list");
+        var habitListItem = document.getElementById("habits").content.cloneNode(true);
+        habitList.appendChild(habitListItem);
+
+        //document.getElementById(".habit-name").innerText = "jlj";
+
+            
+        }
+    </script>
+    
 
 </body>
 </html>
