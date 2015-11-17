@@ -21,7 +21,7 @@
                 <input type="hidden" name="habit-id">
                 <ul class="habit-info">
                     <li><div class="habit-name"></div>
-                        <button type="button" class="op op-del" title="delete habit">
+                        <button type="button" class="op op-del" title="delete habit" onclick="deleteHabit(this)">
                         <img src="../img/delete.svg" alt="Del">
                         </button>
                     
@@ -107,21 +107,37 @@
 
     <script>   
         // delete habit function
-        $(document).ready(function() {
-            $('.op-del').on('click', function() {
-                var x = confirm("Are you sure you want to delete this habit?");
-                if (x) {
-                    var child = $(this.parentNode.parentNode.parentNode)
-                    child.addClass(' animated fadeOutLeft');
-                    child.one('webkitAnimationEnd', function(event) {
-                        $(this).remove(); 
-                    });                
-                }
-                else
-                    return false;
-            });
+//        $(document).ready(function() {
+//            $('.op-del').on('click', function() {
+//                var x = confirm("Are you sure you want to delete this habit?");
+//                if (x) {
+//                    var child = $(this.parentNode.parentNode.parentNode)
+//                    child.addClass(' animated fadeOutLeft');
+//                    child.one('webkitAnimationEnd', function(event) {
+//                        $(this).remove(); 
+//                    });                
+//                }
+//                else
+//                    return false;
+//            });
+//            
+//        });
+        
+        function deleteHabit(element) {
+            var x = confirm("Are you sure you want to delete this habit?");
             
-        });
+            if (x) {
+                var child = element.parentNode.parentNode.parentNode;
+                child.className = child.className + " animated fadeOutLeft";
+                $(child).one('webkitAnimationEnd', function(event) {
+                    $(this).remove();
+                });
+            }
+            else
+                return false;
+        }
+        
+        
     </script>
 <script>
 var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/');
