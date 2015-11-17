@@ -25,35 +25,38 @@ function selectImage(name) {
 document.querySelector('#save_p').onclick = function(){
 
 	var images = document.getElementsByClassName("icon");
-	var image = '';
+	var image = "";
 
 	for(var i = 0; i< images.length; i++){
 		if(images[i].getAttribute("data-active") == "true"){
-			image = images[i].src.substring(image.src.lastIndexOf("/img/"), image.length);
+			image = images[i].src.substring(images[i].src.indexOf("/img/"), images[i].src.length);
 		}
 	}
 
 
 	var sHabitTitle = document.querySelector('#title').value;
 	var sHabitIcon = image;
-	var sWeeklyFreq = '';
-	var sDailyFreq = '';
+	var sWeeklyFreq = "";
+	var sDailyFreq = "";
+    var sBestRecord = 0;
+    var sDaysInARow = 0;
+    var sDescription = document.querySelector('#description').value;
 	var sOthers = document.querySelector('#others').value;
 
-	var aWeeklyElements = document.getElementsByClassName(".weekly-freq");
-	var aDailyElements = document.getElementsByClassName(".daily-freq");
+	var aWeeklyElements = document.getElementsByClassName("weekly-freq");
+	var aDailyElements = document.getElementsByClassName("daily-freq");
 
 	console.log(aWeeklyElements);
 	console.log(aDailyElements);
-	for(var i=0; i < aWeeklyElements; i++){
+	for(var i=0; i < aWeeklyElements.length; i++){
 		if(aWeeklyElements[i].checked){
-			sWeeklyFreq += aWeeklyElements[i].value;
+			sWeeklyFreq += aWeeklyElements[i].value + ",";
 		}
 	}
 
-	for(var i=0; i < aDailyElements; i++){
+	for(var i=0; i < aDailyElements.length; i++){
 		if(aDailyElements[i].checked){
-			sDailyFreq += aWeeklyElements[i].value;
+			sDailyFreq += aDailyElements[i].value + ",";
 		}
 	}
 
@@ -69,9 +72,12 @@ document.querySelector('#save_p').onclick = function(){
 	oHabitsRef.push().set({
 		title: 				sHabitTitle,
 		icon: 				sHabitIcon,
-		frequency: 			sWeeklyFreq,
+		weekly_frequency: 	sWeeklyFreq,
 		daily_frequency: 	sDailyFreq,
-		others: 			sOthers  
+        description:        sDescription,
+        bestRecord:         sBestRecord,
+        daysInARow:         sDaysInARow,
+		  
 	});
 
 }
