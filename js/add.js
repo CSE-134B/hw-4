@@ -40,6 +40,8 @@ document.querySelector('#save_p').onclick = function(){
 	var sDailyFreq = "";
     var sBestRecord = 0;
     var sDaysInARow = 0;
+    var sNumCompletedToday = 0;
+    var sTotalToday = 5;
     var sDescription = document.querySelector('#description').value;
 	var sOthers = document.querySelector('#others').value;
 
@@ -80,6 +82,8 @@ document.querySelector('#save_p').onclick = function(){
         description:        sDescription,
         bestRecord:         sBestRecord,
         daysInARow:         sDaysInARow, 
+        numCompletedToday:  sNumCompletedToday,
+        totalToday:         sTotalToday,
 	});
 
 	var oNotificationsRef = oFirebaseRef.child("notifications");
