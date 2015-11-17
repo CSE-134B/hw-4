@@ -34,13 +34,13 @@
                 </ul>
                 <div class="message">
                     <span class="message-total">
-                        <strong>2</strong> days in a row! Best Record: <strong>5</strong><br>
+                        <strong >2</strong> days in a row! Best Record: <strong >5</strong><br>
                        <progress class="habit-progress" max="100" value="0"></progress>
                     </span><br>
-                    <span class="message-today" visibility:"hidden">Completed <strong id="habitCounter">1</strong>/<strong id="habitStop">1</strong> for today!</span>
+                    <span visibility="hidden">Completed <strong id="habitCounter" class = "completed"></strong>/<strong id="habitStop" class = "totalNum"></strong> for today!</span>
                 </div>
                 <div class="habit-op">
-                    <button type="button" class="op op-done" title="done"  value="0" data-count-stop="3">
+                    <button type="button" class="op op-done" title="done" onclick ="done(this)"  value="0" data-count-stop="3">
                         <img src="../img/done.svg" alt="Done">
                     </button>
                 </div>
@@ -66,37 +66,32 @@
     <script src="../js/list.js"></script>
     <script src="../js/notifications.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script>
-        function done(){
-            
-            console.log("hello world");
-        }
-    </script>
-    <script> 
-        //to handle habit completed button clicks
+   <script>
         
-//        $(document).ready(function(){
-//            $('.op-done').bind('click', function(e) {
-//                console.log("entered function");
-//                var counter = $(this).val(); 
-//                var countstop = $(this).data('countStop');
-            
-            $(document).bind('click','.op-done', function(e) {
-                console.log("fsdfsd");
+        function done(currentButton){
+                        var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/');
+            var habitTitle = currentButton.parentNode.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.innerHTML;
+            oFirebaseRef.child("habits").on("value", function(snapshot){
+                var data = snapshot.val();
+                console.log(data["title"]);   
+            });
+                                                                                     
+            currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.style.visibility= "visible";
                 var counter = $('.op-done').val(); 
                 var countstop = $('.op-done').data('countStop');
                 var newCount = parseInt(counter) + 1;
                
                 $('.op-done').val(newCount);
                 
-
                 //display message
                 //var msgElement = $('#habits').find(".message");
                 //var msgToday = msgElement.find(".message-today");
                // $(".message-today").html("hello world!");
                 if (newCount >= countstop) {
                     //message if habit is completed
-                    $(".message-today").html("Completed Habit!");
+                   currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.innerHTML = "Completed Habit!";
+                    
+                    
                 }
                 else {
                     //var habitCount = msgElement.find("#habitCounter");
@@ -106,11 +101,9 @@
                     //var habitStop = msgElement.find("#habitStop");
                     $("#habitStop").html(countstop);
                 }
-                $(".message-today").css("visibility","visible");
-            });
-                                 
-//        });
+        }
     </script>
+    
 
     <script>   
         // delete habit function
@@ -136,9 +129,9 @@ var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/')
 window.onload = function()
         {
 
-                    var habitList = document.getElementById("habit-list");
-                    var index = 0;
-        oFirebaseRef.child("habits").once("value", function(snapshot){
+            var habitList = document.getElementById("habit-list");
+            var index = 0;
+            oFirebaseRef.child("habits").once("value", function(snapshot){
             var sBestRecords = [];
             var sDaily_frequencys = [];
             var sDaysInARows = [];
@@ -146,6 +139,8 @@ window.onload = function()
             var sIcons = [];
             var sTitles = [];
             var sWeekly_frequencys = [];
+            var sNumCompletedTodays = [];
+            var sTotalTodays = [];
             
      snapshot.forEach(function(childSnapshot){
                 
@@ -157,12 +152,10 @@ window.onload = function()
                 sIcons[index] = data.icon;
                 sTitles[index] = data.title;
                 sWeekly_frequencys[index] = data.weekly_frequency;
+                sNumCompletedTodays[index] = data.numCompletedToday;
+                sTotalTodays[index] = data.totalToday;
                 console.log(index);
                 index++;
-
-
-
-                
 
                 
           });
@@ -173,8 +166,10 @@ window.onload = function()
                     console.log(document.getElementsByClassName("habit-name")[i].innerHTML = sTitles[i]);
                     console.log(document.getElementsByClassName("habit-icon")[i].src = sIcons[i]);
                     console.log(document.getElementsByClassName("habit-desc")[i].innerHTML = sDescriptions[i]);
+                    console.log(document.getElementsByClassName("completed")[i].innerHTML = sNumCompletedTodays[i]);
+                    console.log(document.getElementsByClassName("totalNum")[i].innerHTML = sTotalTodays[i]);
                     
-                    console.log(document.getElementsByTagName("li")[0].setAttribute("id",sTitles[i]));
+              
                 }
                 
 
