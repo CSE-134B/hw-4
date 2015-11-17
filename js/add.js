@@ -66,19 +66,34 @@ document.querySelector('#save_p').onclick = function(){
 	console.log("Daily", sDailyFreq);
 	console.log("Others", sOthers);
 
+
 	var oHabitsRef = oFirebaseRef.child("habits");
 
-	//Save the object to the database
-	oHabitsRef.push().set({
+	oNewHabitRef = oHabitsRef.push();
+	sHabitId = oNewHabitRef.key();
+	
+	oNewHabitRef.set({
 		title: 				sHabitTitle,
 		icon: 				sHabitIcon,
 		weekly_frequency: 	sWeeklyFreq,
 		daily_frequency: 	sDailyFreq,
         description:        sDescription,
         bestRecord:         sBestRecord,
-        daysInARow:         sDaysInARow,
-		  
+        daysInARow:         sDaysInARow, 
 	});
+
+	var oNotificationsRef = oFirebaseRef.child("notifications");
+	var date = Date.now();
+	
+	var oNewNotificationRef = oNotificationsRef.child(sHabitId);
+
+	oNewNotificationRef.set({
+    	habitTitle:			sHabitTitle,
+    	weekly_frequency: 	sWeeklyFreq,
+    	daily_frequency: 	sDailyFreq,
+    	last_updated: 		date
+    });				
+
 
 }
 
