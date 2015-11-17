@@ -56,6 +56,7 @@
         //to handle habit completed button clicks
         $(document).ready(function(){
             $('.op-done').bind('click', function(e) {
+                console.log("entered function");
                 var counter = $(this).val(); 
                 var countstop = $(this).data('countStop');
                 var newCount = parseInt(counter) + 1;
@@ -136,7 +137,7 @@ window.onload = function()
                 
 
                 
-          })
+          });
                
                 for(i = 0; i<index; i++){
                     var habitListItem = document.getElementById("habits").content.cloneNode(true);
@@ -149,10 +150,8 @@ window.onload = function()
 
         });
         
-
-
             
-        }    
+        }   
 </script>
     
 
