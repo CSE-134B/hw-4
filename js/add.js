@@ -66,13 +66,22 @@ document.querySelector('#save_p').onclick = function(){
 	var oHabitsRef = oFirebaseRef.child("habits");
 
 	//Save the object to the database
-	oHabitsRef.push().set({
+	var oNewHabitRef = oHabitsRef.push().set({
 		title: 				sHabitTitle,
 		icon: 				sHabitIcon,
 		frequency: 			sWeeklyFreq,
 		daily_frequency: 	sDailyFreq,
 		others: 			sOthers  
 	});
+
+	var sHabitId = oNewHabitRef
+
+	var oNotificationsRef = oFirebaseRef.child("notifications");
+
+	//UTC timestamp in milliseconds
+    Date.now = function() { return new Date().getTime(); }
+
+
 
 }
 
