@@ -1,5 +1,6 @@
 var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/');
 
+
 function showMsg(element){
             var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
             // alert(msgElement.innerHTML);
