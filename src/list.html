@@ -70,10 +70,11 @@
         
         function done(currentButton){
                         var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/');
+            
             var habitTitle = currentButton.parentNode.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.innerHTML;
             oFirebaseRef.child("habits").on("value", function(snapshot){
                 var data = snapshot.val();
-                console.log(data["title"]);   
+                console.log(snapshot.child("title"));   
             });
                                                                                      
             currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.style.visibility= "visible";
