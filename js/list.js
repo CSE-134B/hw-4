@@ -1,15 +1,17 @@
 var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/');
 
 
+window.onload = function() {
+
+    
 function showMsg(element){
-            var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
-            // alert(msgElement.innerHTML);
-            msgElement.style.visibility="visible";
-        }
+    var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
+    // alert(msgElement.innerHTML);
+    msgElement.style.visibility="visible";
+}
 
-        function deleteHabit(element){
+//function deleteHabit(element){}
           
-
 
 
 var animator = function(oProgress){
@@ -26,13 +28,15 @@ var animator = function(oProgress){
 }
 
 document.querySelector(".op-done").onclick = function(){
+    console.log("entered function op-done");
 	var oParentLi = this.parentNode.parentNode;
 	var aChildren = oParentLi.getElementsByTagName('progress');
 	var oProgress = aChildren[0];
     animator(oProgress);
 }
 
-document.querySelector(".op-delete").onclick = function(){
+document.querySelector(".op-del").onclick = function(){
+    console.log("entered function op-del");
   	var oHabit = this.parentNode.parentNode;
   	var sHabitId = oHabit.querySelector('input[name=habit-id]').value;
     var oHabitsList = oHabit.parentNode;
@@ -47,4 +51,9 @@ document.querySelector(".op-delete").onclick = function(){
   			console.log('Synchronization succeeded');
   			oHabitsList.removeChild(oHabit);
   		}
+    }
 }
+
+
+
+};

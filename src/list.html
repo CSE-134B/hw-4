@@ -21,7 +21,7 @@
                 <input type="hidden" name="habit-id">
                 <ul class="habit-info">
                     <li><div class="habit-name"></div>
-                        <button type="button" class="op op-del" title="delete habit">
+                        <button type="button" class="op op-del" title="delete habit" onclick="deleteHabit(this)">
                         <img src="../img/delete.svg" alt="Del">
                         </button>
                     
@@ -37,7 +37,7 @@
                         <strong >2</strong> days in a row! Best Record: <strong >5</strong><br>
                        <progress class="habit-progress" max="100" value="0"></progress>
                     </span><br>
-                    <span visibility:"hidden">Completed <strong id="habitCounter" class = "completed"></strong>/<strong id="habitStop" class = "totalNum"></strong> for today!</span>
+                    <span visibility="hidden">Completed <strong id="habitCounter" class = "completed"></strong>/<strong id="habitStop" class = "totalNum"></strong> for today!</span>
                 </div>
                 <div class="habit-op">
                     <button type="button" class="op op-done" title="done" onclick ="done(this)"  value="0" data-count-stop="3">
@@ -66,7 +66,7 @@
     <script src="../js/list.js"></script>
     <script src="../js/notifications.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script>
+   <script>
         
         function done(currentButton){
                         var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/');
@@ -84,7 +84,6 @@
                
                 $('.op-done').val(newCount);
                 
-
                 //display message
                 //var msgElement = $('#habits').find(".message");
                 //var msgToday = msgElement.find(".message-today");
@@ -109,21 +108,37 @@
 
     <script>   
         // delete habit function
-        $(document).ready(function() {
-            $('.op-del').on('click', function() {
-                var x = confirm("Are you sure you want to delete this habit?");
-                if (x) {
-                    var child = $(this.parentNode.parentNode.parentNode)
-                    child.addClass(' animated fadeOutLeft');
-                    child.one('webkitAnimationEnd', function(event) {
-                        $(this).remove(); 
-                    });                
-                }
-                else
-                    return false;
-            });
+//        $(document).ready(function() {
+//            $('.op-del').on('click', function() {
+//                var x = confirm("Are you sure you want to delete this habit?");
+//                if (x) {
+//                    var child = $(this.parentNode.parentNode.parentNode)
+//                    child.addClass(' animated fadeOutLeft');
+//                    child.one('webkitAnimationEnd', function(event) {
+//                        $(this).remove(); 
+//                    });                
+//                }
+//                else
+//                    return false;
+//            });
+//            
+//        });
+        
+        function deleteHabit(element) {
+            var x = confirm("Are you sure you want to delete this habit?");
             
-        });
+            if (x) {
+                var child = element.parentNode.parentNode.parentNode;
+                child.className = child.className + " animated fadeOutLeft";
+                $(child).one('webkitAnimationEnd', function(event) {
+                    $(this).remove();
+                });
+            }
+            else
+                return false;
+        }
+        
+        
     </script>
 <script>
 var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/');
@@ -131,9 +146,9 @@ var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/')
 window.onload = function()
         {
 
-                    var habitList = document.getElementById("habit-list");
-                    var index = 0;
-        oFirebaseRef.child("habits").once("value", function(snapshot){
+            var habitList = document.getElementById("habit-list");
+            var index = 0;
+            oFirebaseRef.child("habits").once("value", function(snapshot){
             var sBestRecords = [];
             var sDaily_frequencys = [];
             var sDaysInARows = [];
@@ -159,12 +174,8 @@ window.onload = function()
                 console.log(index);
                 index++;
 
-
-
                 
-
-                
-          })
+          });
                
                 for(i = 0; i<index; i++){
                     var habitListItem = document.getElementById("habits").content.cloneNode(true);
@@ -181,10 +192,8 @@ window.onload = function()
 
         });
         
-
-
             
-        }    
+        }   
 </script>
     
 
