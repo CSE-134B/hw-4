@@ -37,7 +37,7 @@ document.querySelector('#save_p').onclick = function(){
 	var sHabitTitle = document.querySelector('#title').value;
 	var sHabitIcon = image;
 	var sWeeklyFreq = "";
-	var sDailyFreq = "";
+	var sDailyFreq = 0;
     var sBestRecord = 0;
     var sDaysInARow = 0;
     var sNumCompletedToday = 0;
@@ -58,7 +58,7 @@ document.querySelector('#save_p').onclick = function(){
 
 	for(var i=0; i < aDailyElements.length; i++){
 		if(aDailyElements[i].checked){
-			sDailyFreq += aDailyElements[i].value + ",";
+			sDailyFreq = parseInt(aDailyElements[i].value);
 		}
 	}
 
@@ -82,8 +82,7 @@ document.querySelector('#save_p').onclick = function(){
         description:        sDescription,
         bestRecord:         sBestRecord,
         daysInARow:         sDaysInARow, 
-        numCompletedToday:  sNumCompletedToday,
-        totalToday:         sTotalToday,
+        numCompleted:  sNumCompletedToday,
 	});
 
 	var oNotificationsRef = oFirebaseRef.child("notifications");
