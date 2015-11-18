@@ -134,14 +134,30 @@
 //        });
         
         function deleteHabit(element) {
+            
             var x = confirm("Are you sure you want to delete this habit?");
             
             if (x) {
                 var child = element.parentNode.parentNode.parentNode;
+                
+                
                 child.className = child.className + " animated fadeOutLeft";
                 $(child).one('webkitAnimationEnd', function(event) {
                     $(this).remove();
                 });
+                
+                var habitTitle = element.previousElementSibling.innerHTML;
+                
+                var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/habits');
+            
+            oFirebaseRef.orderByChild("title").equalTo(habitTitle).once("value", function(snapshot){
+                                                  
+                snapshot.forEach(function(childSnapshot){
+                   
+                    oFirebaseRef.child(childSnapshot.key()).remove();
+                    
+                });
+            });
             }
             else
                 return false;
