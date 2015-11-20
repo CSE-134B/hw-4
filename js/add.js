@@ -40,27 +40,31 @@ document.querySelector('#save_p').onclick = function(){
     //checks to ensure form is filled in correctly before submitting
 	//if no title, alert user
     if(!$('#title').val()) {
-        alert("Please make a Habit Title");
+        //alert("Please make a Habit Title");
+        swal("Oops!", "Please enter a Habit Title", "error");
         return;
     }
             
     //if a weekly frequency isn't selected, alert user
     if(!$('input:checkbox').is(':checked')){
-        alert("Please select a Weekly Frequency"); 
+        //alert("Please select a Weekly Frequency"); 
+        swal("Oops!", "Please select a Weekly Frequency", "error");
         return;
     }
             
     //if a daily frequency or others frequency isn't selected, alert user
     if(!$('input:radio').is(':checked')){                 
          if(!$('#others').val()){
-            alert("Please select or enter an Daily Frequency");
+            //alert("Please select or enter a Daily Frequency");
+            swal("Oops!", "Please select or enter a Daily Frequency", "error");
             return;
         }        
     }
            
     //if user enters number less than the minimum, alert user 
     if($('#others').val() < $('#others').min){
-        alert("Please enter a valid Daily Frequency"); 
+        //alert("Please enter a valid Daily Frequency"); 
+        swal("Oops!", "Please enter a valid Daily Frequency", "error");
         return;
     }
             
