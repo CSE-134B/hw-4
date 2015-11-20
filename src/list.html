@@ -85,6 +85,11 @@
                 var newCount = counter + 1;
                     //var ref = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/habits');
                     console.log(oFirebaseRef.child(childSnapshot.key()).update({numCompleted : newCount}));
+
+                    var oCheckedNotificationRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/notifications/' + childSnapshot.key());
+                    var oUpdatedDate = Date.now();
+
+                    oCheckedNotificationRef.update({'last_updated': oUpdatedDate});
                    // console.log(childSnapshot.key());
                 //$('.op-done').val(newCount);
                 

@@ -74,14 +74,15 @@ var checkNotification = function(oNotification, sNotificationKey){
 			oHabitRef.once("value", function(data){
 				var oHabit = data.val();
 				showUserNotifications(iMissedNotifications, oHabit.title);
+				var oCheckedNotificationRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/notifications/' + sNotificationKey);
+		var oUpdatedDate = Date.now();
+
+		oCheckedNotificationRef.update({'last_updated': oUpdatedDate});
 			});
 			
 		}
 
-	var oCheckedNotificationRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/notifications/' + sNotificationKey);
-	var oUpdatedDate = Date.now();
-
-	oCheckedNotificationRef.update({'last_updated': oUpdatedDate});
+	
 }
 
 
