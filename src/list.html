@@ -205,6 +205,7 @@ window.onload = function()
                 for(i = 0; i<index; i++){
                     var habitListItem = document.getElementById("habits").content.cloneNode(true);
                     habitList.appendChild(habitListItem);
+                    //$(habitList).prepend(habitListItem);
                     console.log(document.getElementsByClassName("habit-name")[i].innerHTML = sTitles[i]);
                     console.log(document.getElementsByClassName("habit-icon")[i].src = ".." + sIcons[i]);
                     console.log(document.getElementsByClassName("habit-desc")[i].innerHTML = sDescriptions[i]);
