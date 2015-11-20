@@ -68,11 +68,15 @@ img.icon{
 	width: 250px;
 	font-size:small;
   }
+  input#description{
+	height: 30px;
+	width: 250px;
+	font-size:small;
+  }
   input#others{
 	height: 30px;
 	width: 250px;
 	font-size:small;
-
 }
   img.icon{
 	width: 60px;
