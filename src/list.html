@@ -59,7 +59,6 @@
     <button type="button" id="addHabit" onclick="location.href='add.html'" title="add habit">+</button>
     
     <script src="../js/list.js"></script>
-    <script src="../js/edit.js"></script>
     <script src="../js/notifications.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
    <script>
@@ -162,7 +161,28 @@ currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSib
 //            else
 //                return false;
         }
-        
+        var data = null;
+        var eFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/habits');
+        var cHabitsRef = oFirebaseRef.child("currentHabit");
+        eFirebaseRef.once("value", function(snapshot){
+             data = snapshot.val();
+        });
+ function editHabit(habit){
+    var habitTitle = habit.previousElementSibling.previousElementSibling.innerHTML;
+
+        for(var keys in data){
+            if(data[keys].title == habitTitle)
+            {   
+                currentKey = keys;
+                break;
+            }
+        }
+    cHabitsRef
+    .set({
+        key: currentKey
+    });
+    location.href='edit.html';
+}
         
     </script>
 <script>
