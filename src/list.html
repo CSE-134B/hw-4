@@ -35,7 +35,7 @@
                 </ul>
                 <div class="message">
                     <span class="message-total">
-                        <strong >0</strong> days in a row! Best Record: <strong >0</strong><br>
+                        <strong >2</strong> days in a row! Best Record: <strong >5</strong><br>
                        <progress class="habit-progress" max="100" value="0"></progress>
                     </span><br>
                     <span visibility="hidden">Completed <strong id="habitCounter" class = "completed"></strong>/<strong id="habitStop" class = "totalNum"></strong> for today!</span>
@@ -61,7 +61,7 @@
    <script>
         
         function done(currentButton){
-            var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/habits');
+                        var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/habits');
             var oParentLi = currentButton.parentNode.parentNode;
             var aChildren = oParentLi.getElementsByTagName('progress');
             var oProgress = aChildren[0];
@@ -70,37 +70,37 @@
             oFirebaseRef.orderByChild("title").equalTo(habitTitle).once("value", function(snapshot){
                                                   
             currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.style.visibility= "visible";
-            
-            snapshot.forEach(function(childSnapshot){
-                var data = childSnapshot.val(); 
-                var index = 0;
-                var countstop = data.daily_frequency;     
+                snapshot.forEach(function(childSnapshot){
+                   var data = childSnapshot.val(); 
+                    var index = 0;
+                
+                var countstop = data.daily_frequency;
+                    
                 var counter = data.numCompleted;
+              
                 var newCount = counter + 1;
-
-                //console.log(oFirebaseRef.child(childSnapshot.key()).update({numCompleted : newCount}));
-                var oCheckedNotificationRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/notifications/' + childSnapshot.key());
-                var oUpdatedDate = Date.now();
-
-                oCheckedNotificationRef.update({'last_updated': oUpdatedDate});
-             
+                    console.log(oFirebaseRef.child(childSnapshot.key()).update({numCompleted : newCount}));
+                    var oCheckedNotificationRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/notifications/' + childSnapshot.key());
+                    var oUpdatedDate = Date.now();
+                    oCheckedNotificationRef.update({'last_updated': oUpdatedDate});
+                   
                 if (newCount >= countstop) {
                     //message if habit is completed
                    currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.innerHTML = "Completed Habit!";
+                    console.log("complete!");
                     animator(oProgress, 100, 100);
                 }
                 else {
                    currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerHTML=newCount;
-                 currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerHTML=countstop;
-
+                    
+currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerHTML=countstop;
                 animator(oProgress, newCount, countstop);
-
                 }
-            });
-            });
+                    });
+                });
         }
-
         var animator = function(oProgress, denom, num){
+            console.log(denom, num);
             var iMsecsPerUpdate = 1000/60;  // # of milliseconds between updates, this gives 60fps
             var iDuration = 3;              // secs to animate for
             var iInterval = ((denom/num) * oProgress.getAttribute('max'))/(iDuration*1000/iMsecsPerUpdate); //Edit this to change the amount the bar animates for
@@ -143,51 +143,47 @@
                 });
             
         }
-        
         var data = null;
         var eFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/habits');
         var cHabitsRef = oFirebaseRef.child("currentHabit");
         eFirebaseRef.once("value", function(snapshot){
              data = snapshot.val();
         });
- 
-        function editHabit(habit){
-            var habitTitle = habit.previousElementSibling.previousElementSibling.innerHTML;
-
-            for(var keys in data){
-                if(data[keys].title == habitTitle) {   
-                    currentKey = keys;
-                    break;
-                }
+ function editHabit(habit){
+    var habitTitle = habit.previousElementSibling.previousElementSibling.innerHTML;
+        for(var keys in data){
+            if(data[keys].title == habitTitle)
+            {   
+                currentKey = keys;
+                break;
             }
-            cHabitsRef
-            .set({
-                key: currentKey
-            });
-            location.href='edit.html';
         }
+    cHabitsRef
+    .set({
+        key: currentKey
+    });
+    location.href='edit.html';
+}
         
     </script>
-    
-    <script>
-        var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/');
-
-        window.onload = function() {
+<script>
+var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/');
+window.onload = function()
+        {
             var habitList = document.getElementById("habit-list");
             var index = 0;
-            
             oFirebaseRef.child("habits").once("value", function(snapshot){
-                var sBestRecords = [];
-                var sDaily_frequencys = [];
-                var sDaysInARows = [];
-                var sDescriptions = [];
-                var sIcons = [];
-                var sTitles = [];
-                var sWeekly_frequencys = [];
-                var sNumCompleted = [];
-                var sTotalTodays = [];
+            var sBestRecords = [];
+            var sDaily_frequencys = [];
+            var sDaysInARows = [];
+            var sDescriptions = [];
+            var sIcons = [];
+            var sTitles = [];
+            var sWeekly_frequencys = [];
+            var sNumCompleted = [];
+            var sTotalTodays = [];
             
-        snapshot.forEach(function(childSnapshot){
+     snapshot.forEach(function(childSnapshot){
                 
                 var data = childSnapshot.val();
                 sBestRecords[index] = data.bestRecord;
@@ -203,31 +199,30 @@
                 
           });
                
-            for(i = 0; i<index; i++){
-                var habitListItem = document.getElementById("habits").content.cloneNode(true);
-                habitList.appendChild(habitListItem);
-                document.getElementsByClassName("habit-name")[i].innerHTML = sTitles[i];
-                document.getElementsByClassName("habit-icon")[i].src = ".." + sIcons[i];
-                document.getElementsByClassName("habit-desc")[i].innerHTML = sDescriptions[i];                    
-                document.getElementsByClassName("completed")[i].innerHTML = sNumCompleted[i];
-                document.getElementsByClassName("totalNum")[i].innerHTML = sDaily_frequencys[i];
-            }
-
                 for(i = 0; i<index; i++){
                     var habitListItem = document.getElementById("habits").content.cloneNode(true);
-
                     habitList.appendChild(habitListItem);
                     document.getElementsByClassName("habit-name")[i].innerHTML = sTitles[i];
                     document.getElementsByClassName("habit-icon")[i].src = ".." + sIcons[i];
                     document.getElementsByClassName("habit-desc")[i].innerHTML = sDescriptions[i];
                     document.getElementsByClassName("completed")[i].innerHTML = sNumCompleted[i];
                     document.getElementsByClassName("totalNum")[i].innerHTML = sDaily_frequencys[i];
+                    habitList.appendChild(habitListItem); 
                 
-        });
+                    console.log(document.getElementsByClassName("habit-name")[i].innerHTML = sTitles[i]);
+                    console.log(document.getElementsByClassName("habit-icon")[i].src = ".." + sIcons[i]);
+                    console.log(document.getElementsByClassName("habit-desc")[i].innerHTML = sDescriptions[i]);
+                    console.log(document.getElementsByClassName("completed")[i].innerHTML = sNumCompleted[i]);
+                    console.log(document.getElementsByClassName("totalNum")[i].innerHTML = sDaily_frequencys[i]);
+                    
+            
+                }
+                
+            });
         
             
-    }   
-    </script>
+        }   
+</script>
     
 
 </body>
