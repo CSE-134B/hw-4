@@ -114,34 +114,5 @@ var getWeeklyFrequency = function(sDays){
 }
 
 var showUserNotifications = function(iNotificationCount, sHabitTitle){
-	alert("You have missed your habit: " + sHabitTitle + " " + iNotificationCount.round() + " times!");
+    alert("You have missed your habit: " + sHabitTitle + " " + iNotificationCount.round() + " times!");
 }
-
-
-
-
-
-
-// oFirebaseRef.child("habits").once("value", function(snapshot){
-//             var sBestRecords = [];
-//             var sDaily_frequencys = [];
-//             var sDaysInARows = [];
-//             var sDescriptions = [];
-//             var sIcons = [];
-//             var sTitles = [];
-//             var sWeekly_frequencys = [];
-            
-//      snapshot.forEach(function(childSnapshot){
-                
-//                 var data = childSnapshot.val();
-//                 sBestRecords[index] = data.bestRecord;
-//                 sDaily_frequencys[index] = data.daily_frequency;
-//                 sDaysInARows[index] = data.daysInARow;
-//                 sDescriptions[index] = data.description;
-//                 sIcons[index] = data.icon;
-//                 sTitles[index] = data.title;
-//                 sWeekly_frequencys[index] = data.weekly_frequency;
-//                 console.log(index);
-//                 index++
-                
-//           })

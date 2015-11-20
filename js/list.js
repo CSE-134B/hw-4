@@ -6,15 +6,8 @@ window.onload = function() {
     
 function showMsg(element){
     var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
-    // alert(msgElement.innerHTML);
     msgElement.style.visibility="visible";
 }
-
-//function deleteHabit(element){}
-          
-
-
-
 
 var progressBarAnimate = function(doneButton){
     console.log("entered function op-done");

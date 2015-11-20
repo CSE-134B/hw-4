@@ -1,9 +1,5 @@
 var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/');
 
-//Get a reference to the habits "table" of the database
-//var oHabitsRef = oFirebaseRef.child("habits");
-
-
 function selectImage(name) {
 	//Clear all the other effects
 	document.getElementById('icon1').style.border = "none";
@@ -40,14 +36,12 @@ document.querySelector('#save_p').onclick = function(){
     //checks to ensure form is filled in correctly before submitting
 	//if no title, alert user
     if(!$('#title').val()) {
-        //swal("Oops!", "Please enter a Habit Title", "error");
         document.getElementById("noTitle").style.display=""
         return;
     }
             
     //if a weekly frequency isn't selected, alert user
     if(!$('input:checkbox').is(':checked')){
-        //swal("Oops!", "Please select a Weekly Frequency", "error");
         document.getElementById("noWFreq").style.display=""
         return;
     }
@@ -55,7 +49,6 @@ document.querySelector('#save_p').onclick = function(){
     //if a daily frequency or others frequency isn't selected, alert user
     if(!$('input:radio').is(':checked')){                 
          if(!$('#others').val()){
-            //swal("Oops!", "Please select or enter a Daily Frequency", "error");
             document.getElementById("noDFreq").style.display=""
             return;
         }
