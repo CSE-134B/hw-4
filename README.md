@@ -40,3 +40,15 @@ Megan Ring A10931249
 -Validation for input on the add a habit form
 -Alerts for invalid input and delete habit confirmation
 -Bug fixes
+
+Xu He
+-Template for habit list item
+-Add a habit to firebase
+-Delete a habit from firebase
+-Connecting buttons (daily frequency, check, etc.) to firebase data
+-Bug fixes
+
+Jiangtian Wang
+-Saving habit data to firebase
+-Edit a habit using firebase
+-Bug fixes
