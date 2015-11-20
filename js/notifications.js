@@ -18,7 +18,6 @@ oNotificationsRef.once("value", function(data) {
 });
 
 var checkNotification = function(oNotification, sNotificationKey){
-	console.log(oNotification);
 	oCurDate = new Date(oCurDate);
 	var iMissedNotifications = 0;
 	var oLastUpdated = new Date(oNotification.last_updated);
@@ -27,12 +26,11 @@ var checkNotification = function(oNotification, sNotificationKey){
 
 	var iDateDifference = oCurDate.getDate() - oLastUpdated.getDate();
 	var iWeeks = 0;
-	console.log("date difference", iDateDifference);
 
 	if(iDateDifference > 1){		//Not on same date
 		if(iDateDifference > 7){
 			iWeeks = iDateDifference / 7;
-			iMissedNotifications = aDays.length * oNotification.daily_frequency;
+			iMissedNotifications = aDays.length * oNotification.daily_frequency * iWeeks;
 		} else{
 			var iCurDay = oCurDate.getDay();
 			var iNotDay = oNotification.getDay();
@@ -55,11 +53,33 @@ var checkNotification = function(oNotification, sNotificationKey){
 		}
 	} else{
 		//Hourly Notifications here
+		var iCurHour =oCurDate.getHours();
+		var iNotHour = oLastUpdated.getHours();
+		var hourlyCheck = 12/oNotification.daily_frequency;
+		for(i=1; i<oNotification.daily_frequency+1; i++){
+			if(iCurHour > (8+(i*hourlyCheck))){		//starting at 8AM and increment by the hourly check
+				iMissedNotifications+=1;
+			}
+
+		}
+
+
+
 	}
 
+
 	if(iMissedNotifications > 0){
-		showUserNotifications(iMissedNotifications);
-	}
+		//TODO: GET HABIT HERE
+		var oHabitRef = oFirebaseRef.child("habits/" + sNotificationKey);
+			oHabitRef.once("value", function(data){
+				data.forEach(function(habitSnapshot){
+					oHabit = habitSnapshot.val();
+					console.log(oHabit);					
+				})
+				
+			});
+			showUserNotifications(iMissedNotifications, oHabit.habitTitle);
+		}
 
 	var oCheckedNotificationRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/notifications/' + sNotificationKey);
 	var oUpdatedDate = Date.now();
@@ -96,8 +116,8 @@ var getWeeklyFrequency = function(sDays){
 
 }
 
-var showUserNotifications = function(iNotificationCount){
-	alert("You have missed" + iNotificationCount + "habits!");
+var showUserNotifications = function(iNotificationCount, sHabitTitle){
+	alert("You have missed your habit: " + sHabitTitle + " " + iNotificationCount + " times!");
 }
 
 

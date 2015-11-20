@@ -68,7 +68,7 @@
                         var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/habits');
             
             var habitTitle = currentButton.parentNode.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.innerHTML;
-            console.log(habitTitle);
+            // console.log(habitTitle);
             oFirebaseRef.orderByChild("title").equalTo(habitTitle).once("value", function(snapshot){
                                                   
             currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.style.visibility= "visible";
@@ -196,7 +196,7 @@ window.onload = function()
                 sWeekly_frequencys[index] = data.weekly_frequency;
                 sNumCompleted[index] = data.numCompleted;
                 
-                console.log(index);
+                // console.log(index);
                 index++;
 
                 
@@ -205,11 +205,11 @@ window.onload = function()
                 for(i = 0; i<index; i++){
                     var habitListItem = document.getElementById("habits").content.cloneNode(true);
                     habitList.appendChild(habitListItem);
-                    console.log(document.getElementsByClassName("habit-name")[i].innerHTML = sTitles[i]);
-                    console.log(document.getElementsByClassName("habit-icon")[i].src = ".." + sIcons[i]);
-                    console.log(document.getElementsByClassName("habit-desc")[i].innerHTML = sDescriptions[i]);
-                    console.log(document.getElementsByClassName("completed")[i].innerHTML = sNumCompleted[i]);
-                    console.log(document.getElementsByClassName("totalNum")[i].innerHTML = sDaily_frequencys[i]);
+                    document.getElementsByClassName("habit-name")[i].innerHTML = sTitles[i];
+                    document.getElementsByClassName("habit-icon")[i].src = ".." + sIcons[i];
+                    document.getElementsByClassName("habit-desc")[i].innerHTML = sDescriptions[i];
+                    document.getElementsByClassName("completed")[i].innerHTML = sNumCompleted[i];
+                    document.getElementsByClassName("totalNum")[i].innerHTML = sDaily_frequencys[i];
                     
               
                 }
