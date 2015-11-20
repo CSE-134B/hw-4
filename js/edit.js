@@ -1,12 +1,8 @@
-var data = null;
 var currentKey = "";
 var flag = null;
 var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/');
 var cHabitsRef = oFirebaseRef.child("currentHabit");
-var habitTitle = "";
-/*document.getElementById('xxx').addEventListener("click", function() {
-	alert("bbb");
-	}, false);*/
+
 function selectImage(name) {
 	//Clear all the other effects
 	document.getElementById('icon1').style.border = "none";
@@ -21,29 +17,6 @@ function selectImage(name) {
 	image.style.border = "5px solid #42A5F5";
 	image.setAttribute("data-active", "true");
 }
-
-function editHabit(habit){
-	 habitTitle = habit.previousElementSibling.previousElementSibling.innerHTML;
-
-		for(var keys in data){
-			if(data[keys].title == habitTitle)
-			{	
-				currentKey = keys;
-				break;
-			}
-		}
-	cHabitsRef
-	.set({
-		key: currentKey
-	});
-	location.href='edit.html';
-}
-
-var eFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/habits');
-eFirebaseRef.once("value", function(snapshot){
-		 data = snapshot.val();
-});
-
 document.querySelector('#save_p').onclick = function(){
 	//var ch = cHabitsRef.key;
 	cHabitsRef.once("value", function(snapshot){
