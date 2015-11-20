@@ -41,16 +41,26 @@ document.querySelector(".op-del").onclick = function(){
   	var sHabitId = oHabit.querySelector('input[name=habit-id]').value;
     var oHabitsList = oHabit.parentNode;
   	var oHabitRef = oFirebaseRef.child("habits" + sHabitId);
+    var oNotificationRef = oFirebaseRef.child("notifications" + sHabitId);
 
-  	oHabitRef.remove(onComplete);
+  	oHabitRef.remove(onCompleteHabit);
 
-  	var onComplete = function(error) {
+  	var onCompleteHabit = function(error) {
   		if (error) {
   			console.log('Synchronization failed');
   		} else {
   			console.log('Synchronization succeeded');
-  			oHabitsList.removeChild(oHabit);
+        oNotificationRef.remove(onCompleteNotification);
   		}
+    }
+
+    var onCompleteNotification = function(error) {
+      if (error) {
+        console.log('Synchronization failed');
+      } else {
+        console.log('Synchronization succeeded');
+        oHabitsList.removeChild(oHabit);
+      }
     }
 }
 

@@ -159,6 +159,6 @@ document.querySelector('#save_p').onclick = function(){
     	last_updated: 		date
     });				
 
-
+	window.location = "list.html";
 }
 
