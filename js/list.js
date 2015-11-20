@@ -18,7 +18,6 @@ var animator = function(oProgress){
 	var iMsecsPerUpdate = 1000/60; 	// # of milliseconds between updates, this gives 60fps
 	var iDuration = 3;             	// secs to animate for
 	var iInterval = oProgress.getAttribute('max')/(iDuration*1000/iMsecsPerUpdate);	//Edit this to change the amount the bar animates for
-
     oProgress.value = oProgress.value + iInterval;
     if (oProgress.value + iInterval < oProgress.getAttribute('max')){
        setTimeout(animator(oProgress), iMsecsPerUpdate);
@@ -27,9 +26,9 @@ var animator = function(oProgress){
     }
 }
 
-document.querySelector(".op-done").onclick = function(){
+var progressBarAnimate = function(doneButton){
     console.log("entered function op-done");
-	var oParentLi = this.parentNode.parentNode;
+	var oParentLi = doneButton.parentNode.parentNode;
 	var aChildren = oParentLi.getElementsByTagName('progress');
 	var oProgress = aChildren[0];
     animator(oProgress);
