@@ -157,6 +157,7 @@ document.querySelector('#save_p').onclick = function(){
     	last_updated: 		date
     });				
 
+    window.location.href = "../src/list.html";
 
 }
 
