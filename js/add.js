@@ -58,20 +58,21 @@ document.querySelector('#save_p').onclick = function(){
             //swal("Oops!", "Please select or enter a Daily Frequency", "error");
             document.getElementById("noDFreq").style.display=""
             return;
-        }        
-    }
-           
-    //if user enters number less than the minimum, alert user 
-    if($('#others').val() < $('#others').attr('min')){
-        swal("Oops!", "Please enter a valid Daily Frequency", "error");
-        return;
+        }
+        //if user enters number less than the minimum, alert user 
+        if($('#others').val() < $('#others').attr('min')){
+            swal("Oops!", "Please enter a valid Daily Frequency", "error");
+            return;
+        }
     }
             
     //if both a daily frequency and others frequency are chosen, go with others frequency
     if($('input:radio').is(':checked')) {
-        if ($('#others').val() > 0) {
+        if ($('#others').val() > 3) {
             $('input:radio').prop("checked",false);  //or .attr
         }
+        else
+            $('#others').attr('value','0');
     }
             
     //if a habit icon isn't chosen, use default add icon
