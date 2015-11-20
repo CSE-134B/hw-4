@@ -72,13 +72,10 @@ var checkNotification = function(oNotification, sNotificationKey){
 		//TODO: GET HABIT HERE
 		var oHabitRef = oFirebaseRef.child("habits/" + sNotificationKey);
 			oHabitRef.once("value", function(data){
-				data.forEach(function(habitSnapshot){
-					oHabit = habitSnapshot.val();
-					console.log(oHabit);					
-				})
-				
+				var oHabit = data.val();
+				showUserNotifications(iMissedNotifications, oHabit.title);
 			});
-			showUserNotifications(iMissedNotifications, oHabit.habitTitle);
+			
 		}
 
 	var oCheckedNotificationRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/notifications/' + sNotificationKey);
@@ -117,7 +114,7 @@ var getWeeklyFrequency = function(sDays){
 }
 
 var showUserNotifications = function(iNotificationCount, sHabitTitle){
-	alert("You have missed your habit: " + sHabitTitle + " " + iNotificationCount + " times!");
+	alert("You have missed your habit: " + sHabitTitle + " " + iNotificationCount.round() + " times!");
 }
 
 
