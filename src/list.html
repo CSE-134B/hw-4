@@ -61,8 +61,7 @@
    <script>
         
         function done(currentButton){
-                        var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/habits');
-
+            var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/habits');
             var oParentLi = currentButton.parentNode.parentNode;
             var aChildren = oParentLi.getElementsByTagName('progress');
             var oProgress = aChildren[0];
@@ -78,8 +77,13 @@
                 var countstop = data.daily_frequency;     
                 var counter = data.numCompleted;
                 var newCount = counter + 1;
+
                 //console.log(oFirebaseRef.child(childSnapshot.key()).update({numCompleted : newCount}));
-                 
+                var oCheckedNotificationRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/notifications/' + childSnapshot.key());
+                var oUpdatedDate = Date.now();
+
+                oCheckedNotificationRef.update({'last_updated': oUpdatedDate});
+             
                 if (newCount >= countstop) {
                     //message if habit is completed
                    currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.innerHTML = "Completed Habit!";
@@ -135,7 +139,6 @@
                             oNotificationRef.child(sHabitKey).remove();
                         });
                     });
-                    //swal("Your habit has been deleted."); 
                     swal({   title: "Deleted!",   text: "Habit successfully deleted.",   timer: 800,   showConfirmButton: false });
                 });
             
@@ -209,6 +212,16 @@
                 document.getElementsByClassName("completed")[i].innerHTML = sNumCompleted[i];
                 document.getElementsByClassName("totalNum")[i].innerHTML = sDaily_frequencys[i];
             }
+
+                for(i = 0; i<index; i++){
+                    var habitListItem = document.getElementById("habits").content.cloneNode(true);
+
+                    habitList.appendChild(habitListItem);
+                    document.getElementsByClassName("habit-name")[i].innerHTML = sTitles[i];
+                    document.getElementsByClassName("habit-icon")[i].src = ".." + sIcons[i];
+                    document.getElementsByClassName("habit-desc")[i].innerHTML = sDescriptions[i];
+                    document.getElementsByClassName("completed")[i].innerHTML = sNumCompleted[i];
+                    document.getElementsByClassName("totalNum")[i].innerHTML = sDaily_frequencys[i];
                 
         });
         
