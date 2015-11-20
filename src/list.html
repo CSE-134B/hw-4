@@ -69,19 +69,27 @@
    <script>
         
         function done(currentButton){
-                        var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/');
+                        var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/habits');
+            
             var habitTitle = currentButton.parentNode.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.innerHTML;
-            oFirebaseRef.child("habits").on("value", function(snapshot){
-                var data = snapshot.val();
-                console.log(data["title"]);   
-            });
-                                                                                     
+            console.log(habitTitle);
+            oFirebaseRef.orderByChild("title").equalTo(habitTitle).once("value", function(snapshot){
+                                                  
             currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.style.visibility= "visible";
-                var counter = $('.op-done').val(); 
-                var countstop = $('.op-done').data('countStop');
-                var newCount = parseInt(counter) + 1;
-               
-                $('.op-done').val(newCount);
+                snapshot.forEach(function(childSnapshot){
+                   var data = childSnapshot.val(); 
+                    var index = 0;
+                
+               // console.log(data.sDaily_frequency);
+                var countstop = data.daily_frequency;
+                    
+                var counter = data.numCompleted;
+              
+                var newCount = counter + 1;
+                    //var ref = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/habits');
+                    console.log(oFirebaseRef.child(childSnapshot.key()).update({numCompleted : newCount}));
+                   // console.log(childSnapshot.key());
+                //$('.op-done').val(newCount);
                 
                 //display message
                 //var msgElement = $('#habits').find(".message");
@@ -95,12 +103,14 @@
                 }
                 else {
                     //var habitCount = msgElement.find("#habitCounter");
-                    
-                    $("#habitCounter").text(newCount);
+                    currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerHTML=newCount;
+    //                $("#habitCounter").text(newCount);
                     
                     //var habitStop = msgElement.find("#habitStop");
-                    $("#habitStop").html(countstop);
+                    currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerHTML=countstop;
                 }
+                    });
+                });
         }
     </script>
     
@@ -124,14 +134,30 @@
 //        });
         
         function deleteHabit(element) {
+            
             var x = confirm("Are you sure you want to delete this habit?");
             
             if (x) {
                 var child = element.parentNode.parentNode.parentNode;
+                
+                
                 child.className = child.className + " animated fadeOutLeft";
                 $(child).one('webkitAnimationEnd', function(event) {
                     $(this).remove();
                 });
+                
+                var habitTitle = element.previousElementSibling.innerHTML;
+                
+                var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/habits');
+            
+            oFirebaseRef.orderByChild("title").equalTo(habitTitle).once("value", function(snapshot){
+                                                  
+                snapshot.forEach(function(childSnapshot){
+                   
+                    oFirebaseRef.child(childSnapshot.key()).remove();
+                    
+                });
+            });
             }
             else
                 return false;
@@ -155,7 +181,7 @@ window.onload = function()
             var sIcons = [];
             var sTitles = [];
             var sWeekly_frequencys = [];
-            var sNumCompletedTodays = [];
+            var sNumCompleted = [];
             var sTotalTodays = [];
             
      snapshot.forEach(function(childSnapshot){
@@ -168,8 +194,8 @@ window.onload = function()
                 sIcons[index] = data.icon;
                 sTitles[index] = data.title;
                 sWeekly_frequencys[index] = data.weekly_frequency;
-                sNumCompletedTodays[index] = data.numCompletedToday;
-                sTotalTodays[index] = data.totalToday;
+                sNumCompleted[index] = data.numCompleted;
+                
                 console.log(index);
                 index++;
 
@@ -182,8 +208,8 @@ window.onload = function()
                     console.log(document.getElementsByClassName("habit-name")[i].innerHTML = sTitles[i]);
                     console.log(document.getElementsByClassName("habit-icon")[i].src = sIcons[i]);
                     console.log(document.getElementsByClassName("habit-desc")[i].innerHTML = sDescriptions[i]);
-                    console.log(document.getElementsByClassName("completed")[i].innerHTML = sNumCompletedTodays[i]);
-                    console.log(document.getElementsByClassName("totalNum")[i].innerHTML = sTotalTodays[i]);
+                    console.log(document.getElementsByClassName("completed")[i].innerHTML = sNumCompleted[i]);
+                    console.log(document.getElementsByClassName("totalNum")[i].innerHTML = sDaily_frequencys[i]);
                     
               
                 }
