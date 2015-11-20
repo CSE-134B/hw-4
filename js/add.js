@@ -62,7 +62,7 @@ document.querySelector('#save_p').onclick = function(){
     }
            
     //if user enters number less than the minimum, alert user 
-    if($('#others').val() < $('#others').min){
+    if($('#others').val() < $('#others').attr('min')){
         swal("Oops!", "Please enter a valid Daily Frequency", "error");
         return;
     }

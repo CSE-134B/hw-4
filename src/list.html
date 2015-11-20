@@ -71,7 +71,6 @@
             var oProgress = aChildren[0];
             
             var habitTitle = currentButton.parentNode.previousElementSibling.previousElementSibling.firstElementChild.firstElementChild.innerHTML;
-            // console.log(habitTitle);
             oFirebaseRef.orderByChild("title").equalTo(habitTitle).once("value", function(snapshot){
                                                   
             currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.style.visibility= "visible";
@@ -79,7 +78,6 @@
                    var data = childSnapshot.val(); 
                     var index = 0;
                 
-               // console.log(data.sDaily_frequency);
                 var countstop = data.daily_frequency;
                     
                 var counter = data.numCompleted;
@@ -130,23 +128,6 @@ currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSib
     
 
     <script>   
-        // delete habit function
-//        $(document).ready(function() {
-//            $('.op-del').on('click', function() {
-//                var x = confirm("Are you sure you want to delete this habit?");
-//                if (x) {
-//                    var child = $(this.parentNode.parentNode.parentNode)
-//                    child.addClass(' animated fadeOutLeft');
-//                    child.one('webkitAnimationEnd', function(event) {
-//                        $(this).remove(); 
-//                    });                
-//                }
-//                else
-//                    return false;
-//            });
-//            
-//        });
-        
         //delete habit alert and transition
         function deleteHabit(element) {
             
@@ -172,13 +153,6 @@ currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSib
                     swal({   title: "Deleted!",   text: "Habit successfully deleted.",   timer: 800,   showConfirmButton: false });
                 });
             
-            //var x = confirm("Are you sure you want to delete this habit?");
-            
-            //if (x) {
-
-            //}
-//            else
-//                return false;
         }
         var data = null;
         var eFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/habits');
@@ -237,7 +211,6 @@ window.onload = function()
                 
                 // console.log(index);
                 index++;
-
                 
           });
                
@@ -249,12 +222,10 @@ window.onload = function()
                     document.getElementsByClassName("habit-desc")[i].innerHTML = sDescriptions[i];
                     document.getElementsByClassName("completed")[i].innerHTML = sNumCompleted[i];
                     document.getElementsByClassName("totalNum")[i].innerHTML = sDaily_frequencys[i];
-                    
-              
                 }
                 
 
-        });
+            });
         
             
         }   
