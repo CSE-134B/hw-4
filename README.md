@@ -20,35 +20,35 @@ Another thing we added was a optional description section for each habit. That w
 Who did what:
 
 Tyler Tedeschi A11155293
--Set up the initial code for firebase
--Animation on progress bar
--Add a habit to the firebase database
--Set up notifications with firebase
--Bug fixes
+- Set up the initial code for firebase
+- Animation on progress bar
+- Add a habit to the firebase database
+- Set up notifications with firebase
+- Bug fixes
 
 Kann Chea A11
--Validate the forms when users add new habit without providing title, weekly and daily frequency.
--Setup hosting on firebase
--Start working on pagination that will be used in assignment #5 
--Bug fixes
+- Validate the forms when users add new habit without providing title, weekly and daily frequency.
+- Setup hosting on firebase
+- Start working on pagination that will be used in assignment #5 
+- Bug fixes
 
 Megan Ring A10931249
--Redesigned appearance of a habit in the list
--Fixed responsive styling from the original template
--Set up button functionality on the list page to store input
--Animations for deleting a habit
--Validation for input on the add a habit form
--Alerts for invalid input and delete habit confirmation
--Bug fixes
+- Redesigned appearance of a habit in the list
+- Fixed responsive styling from the original template
+- Set up button functionality on the list page to store input
+- Animations for deleting a habit
+- Validation for input on the add a habit form
+- Alerts for invalid input and delete habit confirmation
+- Bug fixes
 
 Xu He
--Template for habit list item
--Add a habit to firebase
--Delete a habit from firebase
--Connecting buttons (daily frequency, check, etc.) to firebase data
--Bug fixes
+- Template for habit list item
+- Add a habit to firebase
+- Delete a habit from firebase
+- Connecting buttons (daily frequency, check, etc.) to firebase data
+- Bug fixes
 
 Jiangtian Wang
--Saving habit data to firebase
--Edit a habit using firebase
--Bug fixes
+- Saving habit data to firebase
+- Edit a habit using firebase
+- Bug fixes
