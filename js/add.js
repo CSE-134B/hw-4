@@ -94,8 +94,8 @@ document.querySelector('#save_p').onclick = function(){
 			image = images[i].src.substring(images[i].src.indexOf("/img/"), images[i].src.length);
 		}
 	}
-
-
+    
+    
 	var sHabitTitle = document.querySelector('#title').value;
 	var sHabitIcon = image;
 	var sWeeklyFreq = "";
