@@ -15,6 +15,7 @@
 			<h2>Add A Habit</h2>
 			<form>
 				<p><label><span id="title_text">Habit Title</span></label></p>
+                <div id="noTitle" style="color:Red;display:none">Please enter habit title</div>
 				<p><input id="title" type="text" name="fullname" placeholder="Exercise 30 minutes" maxlength="16" required></p>
                 <p><label><span id="title_text">Habit Description</span></label></p>
 				<p><input id="description" type="text" name="description" placeholder="Optional" maxlength="128"></p>
@@ -24,6 +25,7 @@
 				<img id="icon3" class="icon" onclick="selectImage('icon3');" data-active="false" src="../img/run.jpg" alt="run image"/>
 				<img id="icon4" class="icon" src="../img/add.png" alt="find a image" data-active="false"/>
 				<p><label>Weekly Frequency</label></p>
+                <div id="noWFreq" style="color:Red;display:none">Please provide weekly frequency</div>
 				<div id="ck-button">
 					<label> <input type="checkbox" class="weekly-freq" name="date" value="sunday"><span>Sun</span></label>
 					<label> <input type="checkbox" class="weekly-freq" name="date" value="monday"><span>Mon</span></label>
@@ -36,6 +38,7 @@
 				</div>
 		
 				<p><label>Daily Frequency</label></p>
+                <div id="noDFreq" style="color:Red;display:none">Please provide daily frequency</div>
 				<div id="daily-button">
 					<label> <input type="radio" class="daily-freq" name="day" value="1"><span>1</span></label>
 					<label> <input type="radio" class="daily-freq" name="day" value="2"><span>2</span></label>
@@ -44,7 +47,7 @@
 					<span id="times">times</span>
 				</div>
 				<p><label><span id="others_text">Others: </span><input id="others" type="number" min="4" max="25" name="day" placeholder="More than 3 times"></label></p>
-				<p id="save_p"><input id="save" type="button"  value="Save It"></p>
+				<p id="save_p"><input id="save" type="button" onclick="location.href='list.html'" value="Save It"></p>
 				
 			</form>
 

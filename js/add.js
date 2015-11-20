@@ -40,30 +40,29 @@ document.querySelector('#save_p').onclick = function(){
     //checks to ensure form is filled in correctly before submitting
 	//if no title, alert user
     if(!$('#title').val()) {
-        //alert("Please make a Habit Title");
-        swal("Oops!", "Please enter a Habit Title", "error");
+        //swal("Oops!", "Please enter a Habit Title", "error");
+        document.getElementById("noTitle").style.display=""
         return;
     }
             
     //if a weekly frequency isn't selected, alert user
     if(!$('input:checkbox').is(':checked')){
-        //alert("Please select a Weekly Frequency"); 
-        swal("Oops!", "Please select a Weekly Frequency", "error");
+        //swal("Oops!", "Please select a Weekly Frequency", "error");
+        document.getElementById("noWFreq").style.display=""
         return;
     }
-            
+              
     //if a daily frequency or others frequency isn't selected, alert user
     if(!$('input:radio').is(':checked')){                 
          if(!$('#others').val()){
-            //alert("Please select or enter a Daily Frequency");
-            swal("Oops!", "Please select or enter a Daily Frequency", "error");
+            //swal("Oops!", "Please select or enter a Daily Frequency", "error");
+            document.getElementById("noDFreq").style.display=""
             return;
         }        
     }
            
     //if user enters number less than the minimum, alert user 
     if($('#others').val() < $('#others').min){
-        //alert("Please enter a valid Daily Frequency"); 
         swal("Oops!", "Please enter a valid Daily Frequency", "error");
         return;
     }
@@ -93,8 +92,8 @@ document.querySelector('#save_p').onclick = function(){
 			image = images[i].src.substring(images[i].src.indexOf("/img/"), images[i].src.length);
 		}
 	}
-
-
+    
+    
 	var sHabitTitle = document.querySelector('#title').value;
 	var sHabitIcon = image;
 	var sWeeklyFreq = "";
