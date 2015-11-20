@@ -225,12 +225,23 @@ window.onload = function()
                
                 for(i = 0; i<index; i++){
                     var habitListItem = document.getElementById("habits").content.cloneNode(true);
+
                     habitList.appendChild(habitListItem);
                     document.getElementsByClassName("habit-name")[i].innerHTML = sTitles[i];
                     document.getElementsByClassName("habit-icon")[i].src = ".." + sIcons[i];
                     document.getElementsByClassName("habit-desc")[i].innerHTML = sDescriptions[i];
                     document.getElementsByClassName("completed")[i].innerHTML = sNumCompleted[i];
                     document.getElementsByClassName("totalNum")[i].innerHTML = sDaily_frequencys[i];
+
+                    habitList.appendChild(habitListItem); 
+                
+console.log(document.getElementsByClassName("habit-name")[i].innerHTML = sTitles[i]);
+                    console.log(document.getElementsByClassName("habit-icon")[i].src = ".." + sIcons[i]);
+                    console.log(document.getElementsByClassName("habit-desc")[i].innerHTML = sDescriptions[i]);
+                    console.log(document.getElementsByClassName("completed")[i].innerHTML = sNumCompleted[i]);
+                    console.log(document.getElementsByClassName("totalNum")[i].innerHTML = sDaily_frequencys[i]);
+                    
+            
                 }
                 
 
