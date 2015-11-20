@@ -99,11 +99,11 @@
                 }
                 else {
                     //var habitCount = msgElement.find("#habitCounter");
-                    currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerHTML=newCount;
+                   currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.innerHTML=newCount;
     //                $("#habitCounter").text(newCount);
                     
                     //var habitStop = msgElement.find("#habitStop");
-                    currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerHTML=countstop;
+currentButton.parentNode.previousElementSibling.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.nextElementSibling.innerHTML=countstop;
                 }
                     });
                 });
@@ -132,7 +132,7 @@
         //delete habit alert and transition
         function deleteHabit(element) {
             
-            swal({   title: "Are you sure?",   text: "Are you sure you want to delete this habit?",   type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",   confirmButtonText: "Yes, delete it!",   closeOnConfirm: false }, 
+            swal({ title: "Are you sure?", text: "Are you sure you want to delete this habit?", type: "warning", showCancelButton: true, confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, delete it!", closeOnConfirm: false }, 
                  
                  function(){ 
                 
