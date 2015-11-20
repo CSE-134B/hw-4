@@ -19,12 +19,69 @@ function selectImage(name) {
 	image.setAttribute("data-active", "true");
 }
 
+//To allow users to toggle the radio buttons
+$("input:radio").on("click",function (e) {
+
+    //if the radio button is selected, set checked to false and remove class
+    if($(this).is(".theone")) { 
+        $(this).prop("checked",false).removeClass("theone");
+        return;
+    }
+            
+    //add class back to the radio button
+    $("input:radio[name='"+$(this).prop("name")+"'].theone").removeClass("theone");
+    $(this).addClass("theone");
+});
 
 
 //Save button pressed
 document.querySelector('#save_p').onclick = function(){
 
-	var images = document.getElementsByClassName("icon");
+    //checks to ensure form is filled in correctly before submitting
+	//if no title, alert user
+    if(!$('#title').val()) {
+        alert("Please make a Habit Title");
+        return;
+    }
+            
+    //if a weekly frequency isn't selected, alert user
+    if(!$('input:checkbox').is(':checked')){
+        alert("Please select a Weekly Frequency"); 
+        return;
+    }
+            
+    //if a daily frequency or others frequency isn't selected, alert user
+    if(!$('input:radio').is(':checked')){                 
+         if(!$('#others').val()){
+            alert("Please select or enter an Daily Frequency");
+            return;
+        }        
+    }
+           
+    //if user enters number less than the minimum, alert user 
+    if($('#others').val() < $('#others').min){
+        alert("Please enter a valid Daily Frequency"); 
+        return;
+    }
+            
+    //if both a daily frequency and others frequency are chosen, go with others frequency
+    if($('input:radio').is(':checked')) {
+        if ($('#others').val() > 0) {
+            $('input:radio').prop("checked",false);  //or .attr
+        }
+    }
+            
+    //if a habit icon isn't chosen, use default add icon
+    if(document.getElementById('icon1').getAttribute("data-active") == "false"){
+        if(document.getElementById('icon2').getAttribute("data-active") == "false"){
+            if(document.getElementById('icon3').getAttribute("data-active") == "false"){
+                document.getElementById('icon4').setAttribute("data-active", "true");
+            }
+        }       
+    }
+       
+    
+    var images = document.getElementsByClassName("icon");
 	var image = "";
 
 	for(var i = 0; i< images.length; i++){

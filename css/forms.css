@@ -33,12 +33,16 @@ input#title{
 	height: 30px;
 	width: 350px;
 	font-size:medium;
-
 }
 input#others{
 	height: 30px;
-	width: 250px;
+	width: 150px;
 	font-size:medium;
+}
+input#description{
+    height: 30px;
+    width: 350px;
+    font-size:medium;
 }
 img.icon{
 	width: 80px;
