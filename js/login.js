@@ -7,7 +7,7 @@ oFirebaseRef.onAuth(authDataCallback);
 function authDataCallback(authData){
 	if(authData){
 		console.log("User " + authData.uid + " is logged in with " + authData.provider);
-		//window.location = "list.html";
+		window.location = "list.html";
 
 	} else{
 		console.log("User is logged out");
@@ -21,7 +21,7 @@ function authHandler(error, authData){
 		//TODO: show error on screen
 	} else{
 		console.log("Authenticated successfully with payload:", authData);
-		//window.location = "list.html";
+		firebasePersistUserAuth(authData);
 	}
 }
 
@@ -31,6 +31,14 @@ function firebaseLogin(userEmail, password){
 		password	: password
 		}, authHandler
 	);
+}
+
+function firebasePersistUserAuth(authData){
+	oFirebaseRef.child("users").child(authData.uid).set({
+		provider: authData.provider,
+		name: authData.password.email.replace(/@.*/, '')
+	});
+	window.location = "list.html";
 }
 
 function firebaseCreateUser(userEmail, password){

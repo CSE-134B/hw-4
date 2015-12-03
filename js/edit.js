@@ -1,3 +1,20 @@
+oFirebaseRef.onAuth(authDataCallback);
+
+
+//This function is called as soon as the authenticate information is received
+function authDataCallback(authData){
+	if(authData){
+		console.log("User " + authData.uid + " is logged in with " + authData.provider);
+		window.location = "list.html";
+
+	} else{
+		console.log("User is logged out");
+		window.location="login.html";
+	}
+}
+
+
+
 var currentKey = "";
 var flag = null;
 var oFirebaseRef = new Firebase('http://boiling-torch-2236.firebaseIO.com/web/');
